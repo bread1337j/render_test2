@@ -53,7 +53,7 @@ public class Main {
         addSquare(0,-100,500,100,0,600, w);
 
         for(int i=0; i<1000; i++){
-            addSquare(i*100, 0, 0, i*100+100, -100, 0, w);
+            addSquare(i*100, 0, 0, i*100+100, -100, 0, w); //test123
         }
 
     }
