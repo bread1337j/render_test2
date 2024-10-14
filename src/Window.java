@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Window {
     List<Triangle> triangles = new ArrayList<>();
     int anglex;
     int angley;
-    double camdist = 1;
+    double zoom = 1.01;
     JFrame fr = new JFrame();
     JPanel pn = new JPanel(){
         @Override
@@ -57,13 +58,19 @@ public class Window {
                 Vector3 p1 = transform.transform(bebra.p1);
                 Vector3 p2 = transform.transform(bebra.p2);
                 Vector3 p3 = transform.transform(bebra.p3);
+                Vector3 p4 = new Vector3(
+                        (bebra.p1.x + bebra.p2.x + bebra.p3.x) / 3,
+                        (bebra.p1.y + bebra.p2.y + bebra.p3.y) / 3,
+                        (bebra.p1.z + bebra.p2.z + bebra.p3.z) / 3
+                );
+                System.out.println(p4);
                 Path2D path = new Path2D.Double();
                 path.moveTo(p1.x, p1.y);
                 path.lineTo(p2.x, p2.y);
                 path.lineTo(p3.x, p3.y);
                 path.closePath();
                 AffineTransform tx = new AffineTransform();
-                tx.scale((double) 1 / camdist, (double) 1 / camdist);
+                tx.scale((double) 1 / zoom, (double) 1 / zoom);
                 path.transform(tx);
                 g2.draw(path);
             }
@@ -111,25 +118,35 @@ public class Window {
                 double yi = 180.0 / pn.getHeight();
                 double xi = 180.0 / pn.getWidth();
                 if (e.getKeyCode() == KeyEvent.VK_UP){
-                    angley -= (int) (20 * xi);
+                    angley -= (int) (10 * xi);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN){
-                    angley += (int) (20 * xi);
+                    angley += (int) (10 * xi);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-                    anglex += (int) (20 * xi);
+                    anglex += (int) (10 * xi);
                 }
-                if (e.getKeyCode() == KeyEvent.VK_LEFT){
-                    anglex -= (int) (20 * xi);
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    anglex -= (int) (10 * xi);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE){
-                    camdist += 0.1;
+                    zoom += 0.1;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_CONTROL){
-                    if(camdist > 0.15) {
-                        camdist -= 0.1;
-                    }
+                    zoom -= 0.1;
                 }
+                /*if (e.getKeyCode() == KeyEvent.VK_W){
+                    camz += 1;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_S){
+                    camz -= 1;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_D){
+                    camx += 1;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_A){
+                    camx -= 1;
+                }*/
                 pn.repaint();
             }
 

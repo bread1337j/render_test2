@@ -37,7 +37,7 @@ public class Main {
     public static void main(String[] args){
         Window w = new Window();
 
-        addSquare(0,0,0,100,100,100, w);
+        /*addSquare(0,0,0,100,100,100, w);
         addSquare(-100,0,-100,0,100,0, w);
         addSquare(100,0,100,200,100,200, w);
 
@@ -50,11 +50,13 @@ public class Main {
         addSquare(100,-100,100,200,0,200, w);
 
 
-        addSquare(0,-100,500,100,0,600, w);
+        addSquare(0,-100,500,100,0,600, w);*/
 
-        for(int i=0; i<1000; i++){
-            addSquare(i*100, 0, 0, i*100+100, -100, 0, w); //test123
-        }
+        addSquare(-50, -50,-50,50,50,50,w);
+
+        //for(int i=0; i<1000; i++){
+        //    addSquare(i*100, 0, 0, i*100+100, -100, 100, w); //test123
+        //}
 
     }
 }

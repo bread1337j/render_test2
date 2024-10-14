@@ -15,4 +15,7 @@ public class Vector3 {
         this.z = (double)z;
     }
 
+    public String toString() {
+        return "<" + this.x + " , " + this.y + " , " + this.z + ">";
+    }
 }
